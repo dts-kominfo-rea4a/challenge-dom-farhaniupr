@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
   </head>
+  <style>
+    .divparrent {
+      width: 100vw;
+      position: relative;
+
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      margin-bottom: 1px;
+      margin-top: 1px;
+    }
+  </style>
   <body>
     <div id="app">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
@@ -26,10 +38,63 @@
       let input;
       let output;
 
+      const app = document.getElementById("app");
+
+      const header = document.createElement("h1");
+      header.id = "todo-title" 
+      header.innerHTML = "To-Do-List"
+      header.style = "text-align:center;"
+
+      const subtitle = document.createElement("h3");
+      subtitle.id = "todo-subtitle" 
+      subtitle.innerHTML = "~Today I Need Do~"
+      subtitle.style = "text-align:center;"
+
+      const div = document.createElement("div");
+      div.className = "divparrent";
+
+      const div_child = document.createElement("div");
+
+      input = document.createElement("input");
+      input.id = "todo-input"; 
+
+      output = document.createElement("ul");
+      output.id = "todo-output"; 
+      
+      button = document.createElement("button");
+      button.id = "todo-submit"
+      button.innerHTML = "submit"
+      button.onclick = () =>{       
+        value_input = document.getElementById("todo-input").value; 
+        fnClickHandler(value_input);
+      }
+
+      div.appendChild(div_child);
+      div_child.appendChild(input);
+      div_child.appendChild(button);
+      div_child.appendChild(output)
+
+      app.append(header);
+      app.append(subtitle);
+      app.append(div);
+      
+      document.addEventListener('keypress', function(e) {
+      if (e.key === "Enter") {
+          e.preventDefault();
+          document.getElementById("todo-submit").click();
+        }
+      });
+
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+          const create_list = document.getElementById("todo-output");
+          let list = document.createElement("li");
+          list.innerHTML = toDoItem;
+          document.getElementById("todo-input").value = ""; 
+          create_list.append(list);
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
