@@ -81,7 +81,8 @@
       document.addEventListener('keypress', function(e) {
       if (e.key === "Enter") {
           e.preventDefault();
-          document.getElementById("todo-submit").click();
+          const value_input = document.getElementById("todo-input").value; 
+          fnClickHandler(value_input);
         }
       });
 
